@@ -1,0 +1,17 @@
+[project]
+name = "mini-mcp"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "rayanramoul", email = "r.ramoul@instadeep.com" }
+]
+requires-python = ">=3.13"
+dependencies = []
+
+[project.scripts]
+mini-mcp = "mini_mcp:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
