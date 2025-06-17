@@ -1,0 +1,30 @@
+{
+  "mcpServers": {
+      "Slack Bot":{
+        "type": "stdio",
+        "command": "/home/rayanramoul/.local/bin/uv",
+        "args": ["run", 
+       "--directory", "/home/rayanramoul/Documents/MCP", 
+        "--no-sync", "mcp", "dev", "/home/rayanramoul/Documents/MCP/src/mini_mcp/servers/slack_server.py"],
+        "env": {
+          "SLACK_BOT_TOKEN": "xoxb-56789012345678901234567890123456"
+        }
+      },
+    "AI Server":{
+        "type": "stdio",
+        "command": "/home/rayanramoul/.local/bin/uv",
+        "args": ["run", "--directory", "/home/rayanramoul/Documents/MCP", "--no-sync", "mcp", "dev", "/home/rayanramoul/Documents/MCP/src/mini_mcp/servers/ai_server.py"],
+        "env": {
+          "OPENAI_API_KEY": "sk-proj-12345678901234567890123456789012"
+        }
+      },
+    "GCP Server":{
+        "type": "stdio",
+        "command": "/home/rayanramoul/.local/bin/uv",
+        "args": ["run", "--directory", "/home/rayanramoul/Documents/MCP", "--no-sync", "mcp", "dev", "/home/rayanramoul/Documents/MCP/src/mini_mcp/servers/gcp_server.py"],
+        "env": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/home/rayanramoul/Documents/MCP/src/mini_mcp/servers/gcp_server.json"
+        }
+      }
+    }
+}
