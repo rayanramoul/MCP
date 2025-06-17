@@ -10,9 +10,11 @@ requires-python = ">=3.13"
 dependencies = [
     "cloudpathlib[gs]>=0.21.1",
     "libtmux>=0.46.2",
+    "litellm>=1.72.6",
     "mcp[cli]>=1.9.4",
     "psutil>=7.0.0",
     "slack-sdk>=3.27.1",
+    "streamlit>=1.45.1",
 ]
 
 [project.scripts]
