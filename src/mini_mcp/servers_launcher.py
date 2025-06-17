@@ -2,6 +2,8 @@ from pathlib import Path
 import libtmux
 from typing import List
 
+# current directory
+GOOGLE_APPLICATION_CREDENTIALS = Path(__file__).parent.parent.parent / "gcp_credentials.json"
 
 def get_server_files() -> List[Path]:
     """Get all Python server files from the servers directory."""
@@ -28,7 +30,10 @@ def launch_servers() -> None:
     # Create a window for each server
     for i, server_file in enumerate(server_files):
         server_name = server_file.stem
-        command = f"uv run --no-sync mcp dev {server_file}"
+        if server_name == "gcp_server":
+            command = f"GOOGLE_APPLICATION_CREDENTIALS={GOOGLE_APPLICATION_CREDENTIALS} uv run --no-sync mcp dev {server_file}"
+        else:
+            command = f"uv run --no-sync mcp dev {server_file}"
         
         if i == 0:
             # Use the first window

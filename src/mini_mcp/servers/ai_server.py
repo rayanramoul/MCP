@@ -20,28 +20,28 @@ class TrainingConfig:
     """Configuration for LLM training."""
     model_name: str = "gpt-3.5-turbo"
     learning_rate: float = 1e-4
-    batch_size: int = 32
-    num_epochs: int = 10
-    max_seq_length: int = 2048
-    warmup_steps: int = 1000
-    weight_decay: float = 0.01
-    gradient_accumulation_steps: int = 4
-    fp16: bool = True
-    num_train_samples: int = 1000000
+    batch_size: int | float = 32
+    num_epochs: int | float = 10
+    max_seq_length: int | float = 2048
+    warmup_steps: int | float = 1000
+    weight_decay: float | int = 0.01
+    gradient_accumulation_steps: int | float = 4
+    fp16: bool | int = True
+    num_train_samples: int | float = 1000000
 
 
 @mcp.tool()
 def launch_training(
     model_name: Optional[str] = None,
-    learning_rate: Optional[float] = None,
-    batch_size: Optional[int] = None,
-    num_epochs: Optional[int] = None,
-    max_seq_length: Optional[int] = None,
-    warmup_steps: Optional[int] = None,
-    weight_decay: Optional[float] = None,
-    gradient_accumulation_steps: Optional[int] = None,
-    fp16: Optional[bool] = None,
-    num_train_samples: Optional[int] = None,
+    learning_rate: None | float | int = None,
+    batch_size: None | int | float = None,
+    num_epochs: None | int | float = None,
+    max_seq_length: None | int | float = None,
+    warmup_steps: None | int | float = None,
+    weight_decay: None | float | int = None,
+    gradient_accumulation_steps: None | int | float = None,
+    fp16: None | bool | int = None,
+    num_train_samples: None | int | float = None,
 ) -> str:
     """Launch a fake LLM training run with the specified hyperparameters.
     
@@ -82,6 +82,13 @@ def launch_training(
         config.fp16 = fp16
     if num_train_samples:
         config.num_train_samples = num_train_samples
+    batch_size = int(batch_size)
+    num_epochs = int(num_epochs)
+    max_seq_length = int(max_seq_length)
+    warmup_steps = int(warmup_steps)
+    gradient_accumulation_steps = int(gradient_accumulation_steps)
+    num_train_samples = int(num_train_samples)
+    
 
     # Generate a unique training ID
     training_id = f"train_{int(time.time())}_{random.randint(1000, 9999)}"

@@ -8,9 +8,10 @@ authors = [
 ]
 requires-python = ">=3.13"
 dependencies = [
-    "cloudpathlib>=0.21.1",
+    "cloudpathlib[gs]>=0.21.1",
     "libtmux>=0.46.2",
     "mcp[cli]>=1.9.4",
+    "psutil>=7.0.0",
     "slack-sdk>=3.27.1",
 ]
 
