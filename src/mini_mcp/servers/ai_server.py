@@ -3,7 +3,6 @@ import random
 import time
 import json
 from datetime import datetime
-from typing import Dict, Optional
 from dataclasses import dataclass
 from mcp.server.fastmcp import FastMCP
 
@@ -12,7 +11,7 @@ from mcp.server.fastmcp import FastMCP
 mcp = FastMCP("AI Training Server")
 
 # Store fake training runs
-training_runs: Dict[str, Dict] = {}
+training_runs: dict[str, dict] = {}
 
 
 @dataclass
@@ -32,7 +31,7 @@ class TrainingConfig:
 
 @mcp.tool()
 def launch_training(
-    model_name: Optional[str] = None,
+    model_name: str | None = None,
     learning_rate: None | float | int = None,
     batch_size: None | int | float = None,
     num_epochs: None | int | float = None,

@@ -16,6 +16,7 @@ dependencies = [
     "pync>=2.0.3",
     "slack-sdk>=3.27.1",
     "streamlit>=1.45.1",
+    "watchdog>=6.0.0",
 ]
 
 [project.scripts]

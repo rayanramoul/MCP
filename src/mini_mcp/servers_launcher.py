@@ -1,11 +1,10 @@
 from pathlib import Path
 import libtmux
-from typing import List
 
 # current directory
 GOOGLE_APPLICATION_CREDENTIALS = Path(__file__).parent.parent.parent / "gcp_credentials.json"
 
-def get_server_files() -> List[Path]:
+def get_server_files() -> list[Path]:
     """Get all Python server files from the servers directory."""
     servers_dir = Path(__file__).parent / "servers"
     return list(servers_dir.glob("*.py"))

@@ -6,9 +6,10 @@ from mcp.client.stdio import stdio_client
 from litellm import experimental_mcp_client
 import asyncio
 import litellm
+import pathlib
 
 # Load MCP server config
-with open(os.path.expanduser("~/.cursor/mcp.json")) as f:
+with pathlib.Path("~/Documents/Github/MCP/.cursor/mcp.json").expanduser().open() as f:
     mcp_config = json.load(f)["mcpServers"]
 
 st.title("LiteLLM MCP Streamlit Demo")
@@ -27,10 +28,10 @@ server_params = StdioServerParameters(
 
 user_message = st.text_input("Enter a message for the LLM + tools:")
 
-show_tools = st.button("Show Available MCP Tools")
+show_tools = st.button("Retrieve Available MCP Tools")
 
 if show_tools:
-    async def show_mcp_tools():
+    async def show_mcp_tools() -> None:
         async with stdio_client(server_params) as (read, write):
             async with ClientSession(read, write) as session:
                 await session.initialize()
@@ -39,12 +40,11 @@ if show_tools:
     asyncio.run(show_mcp_tools())
 
 if st.button("Send"):
-    async def list_tools_and_respond(user_message):
+    async def list_tools_and_respond(user_message: str) -> None:
         async with stdio_client(server_params) as (read, write):
             async with ClientSession(read, write) as session:
                 await session.initialize()
                 tools = await experimental_mcp_client.load_mcp_tools(session=session, format="openai")
-                # st.write("Available Tools:", tools)  # Only show if needed
                 if user_message:
                     messages = [{"role": "user", "content": user_message}]
                     llm_response = await litellm.acompletion(
