@@ -1,0 +1,27 @@
+{
+  "mcpServers": {
+      "System Server":{
+        "type": "stdio",
+        "command": "/opt/homebrew/bin/uv",
+        "args": ["run", 
+       "--directory", "/Users/r.ramoul/Documents/Github/MCP", 
+       "mcp", "run", "/Users/r.ramoul/Documents/Github/MCP/src/mini_mcp/servers/system_server.py"]
+      },
+    "AI Server":{
+        "type": "stdio",
+        "command": "/opt/homebrew/bin/uv",
+        "args": ["run", "--directory", "/Users/r.ramoul/Documents/Github/MCP", "mcp", "run", "/Users/r.ramoul/Documents/Github/MCP/src/mini_mcp/servers/ai_server.py"],
+        "env": {
+          "OPENAI_API_KEY": "sk-proj-12345678901234567890123456789012"
+        }
+      },
+    "GCP Server":{
+        "type": "stdio",
+        "command": "/opt/homebrew/bin/uv",
+        "args": ["run", "--directory", "/Users/r.ramoul/Documents/Github/MCP", "mcp", "run", "/Users/r.ramoul/Documents/Github/MCP/src/mini_mcp/servers/gcp_server.py"],
+        "env": {
+          "GOOGLE_APPLICATION_CREDENTIALS": "/Users/r.ramoul/Documents/Github/MCP/gcp_credentials.json"
+        }
+      }
+    }
+}

@@ -1,6 +1,5 @@
 """GCP Server for file operations using MCP."""
 import os
-from typing import List, Optional
 from cloudpathlib import CloudPath
 from mcp.server.fastmcp import FastMCP
 
@@ -15,7 +14,7 @@ if not gcp_credentials:
 
 
 @mcp.tool()
-def list_files(bucket_path: str) -> List[str]:
+def list_files(bucket_path: str) -> list[str]:
     """List all files in a GCP bucket directory.
     
     Args:
@@ -38,9 +37,24 @@ def list_files(bucket_path: str) -> List[str]:
     except Exception as e:
         raise ValueError(f"Error listing files: {str(e)}")
 
+@mcp.resource("gcp://{username}")
+def get_bucket_name_from_username(username: str) -> str:
+    """Get the bucket name from the username.
+    
+    Args:
+        username: The username to get the bucket name from
+        
+    Returns:
+        str: The bucket name
+        
+    Raises:
+        ValueError: If the username is invalid
+    """
+    return f"gs://runs_{username}_mrna"
+
 
 @mcp.tool()
-def download_file(bucket_path: str, local_path: Optional[str] = None) -> str:
+def download_file(bucket_path: str, local_path: str | None = None) -> str:
     """Download a file from GCP bucket and return its content.
     
     Args:

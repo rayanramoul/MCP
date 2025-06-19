@@ -673,6 +673,7 @@ dependencies = [
     { name = "litellm" },
     { name = "mcp", extra = ["cli"] },
     { name = "psutil" },
+    { name = "pync" },
     { name = "slack-sdk" },
     { name = "streamlit" },
 ]
@@ -684,6 +685,7 @@ requires-dist = [
     { name = "litellm", specifier = ">=1.72.6" },
     { name = "mcp", extras = ["cli"], specifier = ">=1.9.4" },
     { name = "psutil", specifier = ">=7.0.0" },
+    { name = "pync", specifier = ">=2.0.3" },
     { name = "slack-sdk", specifier = ">=3.27.1" },
     { name = "streamlit", specifier = ">=1.45.1" },
 ]
@@ -1064,6 +1066,15 @@ sdist = { url = "https://files.pythonhosted.org/packages/7c/2d/c3338d48ea6cc0feb
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8a/0b/9fcc47d19c48b59121088dd6da2488a49d5f72dacf8262e2790a1d2c7d15/pygments-2.19.1-py3-none-any.whl", hash = "sha256:9ea1544ad55cecf4b8242fab6dd35a93bbce657034b0611ee383099054ab6d8c", size = 1225293, upload-time = "2025-01-06T17:26:25.553Z" },
 ]
+
+[[package]]
+name = "pync"
+version = "2.0.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "python-dateutil" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/71/ce/06fca51df0cceb13dbcd8168e2657ffd942184005b3bb958dd17c14e0148/pync-2.0.3.tar.gz", hash = "sha256:38b9e61735a3161f9211a5773c5f5ea698f36af4ff7f77fa03e8d1ff0caa117f", size = 374289, upload-time = "2018-05-04T19:28:40.383Z" }
 
 [[package]]
 name = "python-dateutil"

@@ -1,11 +1,16 @@
 # This library is language agnostic and available
 # in most popular programming languages
-from typing import Optional
-import os
 from mcp.server.fastmcp import FastMCP
 import platform
 import subprocess
-from typing import Any
+
+# Import pync conditionally to avoid issues on non-macOS systems
+if platform.system() == "Darwin":
+    try:
+        from pync import Notifier
+    except ImportError:
+        print("[WARNING] pync not installed. Please install it with: pip install pync")
+        Notifier = None
 
 
 # Initialize the server
@@ -23,15 +28,23 @@ def notify_training_done(training_id: str, main_metric: str, value: float) -> No
     title = f"Training Complete: {training_id}"
     message = f"{main_metric.capitalize()}: {value}"
     system = platform.system()
+    
     if system == "Linux":
         subprocess.run([
             "notify-send", title, message
         ], check=False)
     elif system == "Darwin":  # macOS
-        script = f'display notification "{message}" with title "{title}"'
-        subprocess.run([
-            "osascript", "-e", script
-        ], check=False)
+        if Notifier is not None:
+            try:
+                Notifier.notify(
+                    message,
+                    title=title,
+                    sound="Glass"  # Use system sound
+                )
+            except Exception as e:
+                print(f"[ERROR] Failed to send notification: {str(e)}")
+        else:
+            print(f"[WARNING] pync not available. {title} - {message}")
     else:
         print(f"[NOTIFY] {title} - {message}")
 

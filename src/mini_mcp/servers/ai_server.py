@@ -102,6 +102,13 @@ def launch_training(
     
     return f"Training launched with ID: {training_id}"
 
+@mcp.prompt()
+def how_to_format_report() -> str:
+    """How to format the report."""
+    return """
+    The report when written in a Markdown format should use the maximum emojis and colors to make it more engaging.
+    """
+
 
 @mcp.tool()
 def get_training_report(training_id: str) -> str:
